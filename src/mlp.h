@@ -9,6 +9,7 @@
 #include <math.h>
 #include <sys/time.h>
 #include <unistd.h>
+#include "mat.h"
 
 #define INPUT_NUM
 #define OUTPUT_NUM
@@ -21,9 +22,36 @@ enum LAYER_TYPE
 		HIDDEN_LAYER
 };
 
-struct Hidden_layer_config
+enum FUNCTION_TYPE
 {
-		int id,
-			nerve_num;
+		Sigmoid,
+		Tanh,
+		ReLU
 };
 
+struct Hidden_layer_config
+{					
+		const int id,
+				  nerve_num,
+				  fun_type;
+		double u;
+};
+
+struct Hidden_layer
+{
+		const int id,
+				  nerve_num,
+				  fun_type;
+		double u;
+		Ptr_mat Ptr_Weight,
+				Ptr_Sigma,
+				Ptr_Output,
+				Ptr_Error;
+};
+
+typedef struct Hidden_layer_config *Ptr_layer_cfg;
+typedef struct Hidden_layer *Ptr_layer;
+
+Ptr_layer creat_layer(Ptr_layer_cfg layer_cfg);
+int construct_network(Ptr_layer *layer);
+int layer_forward(Ptr_layer *layer);
