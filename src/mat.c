@@ -10,8 +10,9 @@ Ptr_mat create_mat(int id, const int row_num, const int column_num)
 		int i;
 
 		Ptr_mat mat = NULL;
-
 		mat = (Ptr_mat)malloc(sizeof(struct Matrix));
+
+		mat->mat = NULL;
 		mat->mat = (double **)malloc(row_num * sizeof(double *));
 		for(i = 0; i < row_num; i++)
 		{
